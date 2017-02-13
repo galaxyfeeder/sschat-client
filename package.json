@@ -1,0 +1,17 @@
+{
+  "name": "sschat-client",
+  "version": "0.1.0",
+  "description": "Client for simple secure chat (sschat).",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "url"
+  },
+  "author": "Gabriel Esteban Gullon <yufuven@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "socket.io-client": "^1.7.2"
+  }
+}
