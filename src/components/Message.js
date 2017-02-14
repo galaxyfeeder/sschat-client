@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
-import './MessageList.css';
+import React from 'react';
 
-class MessageList extends Component {
-  render() {
-    return (
-      <div className="MessageList">
-
-      </div>
-    );
-  }
+class Message extends React.Component{
+    render (){
+        return (
+            <div className="message mesage-{this.props.align}">
+                {this.props.message}
+            </div>
+        );
+    }
 }
 
-export default ChatApp;
+export default Message;
