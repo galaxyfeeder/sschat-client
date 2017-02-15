@@ -1,9 +1,9 @@
 import React from 'react';
-import './ChatApp.css';
-import Conversation from './Conversation';
-import Contacts from './Contacts';
+import Conversation from '../components/Conversation';
+import Contacts from '../components/Contacts';
+import './PanelChat.css';
 
-class ChatApp extends React.Component {
+class PanelChat extends React.Component {
     constructor (props){
         super(props);
         this.changeConversation = this.changeConversation.bind(this);
@@ -27,7 +27,7 @@ class ChatApp extends React.Component {
         this.setState({selected_contact: contact});
     }
 
-    sendmessage (message, pub_key){        
+    sendmessage (message, pub_key){
         // do it once received server callback
         let messages = this.state.conversations[pub_key];
         messages.push({message: message, align: 'right'});
@@ -51,7 +51,7 @@ class ChatApp extends React.Component {
         }
     }
 
-    render(){
+    render (){
         return (
             <div className="container">
                 <div className="panel panel-info panel-main">
@@ -74,4 +74,4 @@ class ChatApp extends React.Component {
     }
 }
 
-export default ChatApp;
+export default PanelChat;

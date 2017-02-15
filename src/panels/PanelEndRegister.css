@@ -1,0 +1,13 @@
+.panel-public {
+    border-right: 2px solid #efefef;
+    height: 100%;
+}
+
+.panel-private {
+    height: 100%;
+}
+
+.well-keys {
+    height: 50%;
+    overflow-y: scroll;
+}
