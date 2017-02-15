@@ -4,7 +4,7 @@ class Message extends React.Component{
     render (){
         return (
             <div className="message mesage-{this.props.align}">
-                {this.props.message}
+                {this.props.message.message}
             </div>
         );
     }

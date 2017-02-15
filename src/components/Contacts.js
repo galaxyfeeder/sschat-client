@@ -12,11 +12,11 @@ class Contacts extends React.Component {
     }
 
     render (){
-        let contacts = [
-            <Contact contact={{name: "Maria", pub_key: 'aslkdmsakmdmasdklmds'}} onclick={this.onclickcontact}/>,
-            <Contact contact={{name: "Miquel", pub_key: 'aslkdmsakmdma535654sdf485sdklmds'}} onclick={this.onclickcontact}/>,
-            <Contact contact={{name: "Marti", pub_key: 'aslkdmsak524sdmdmasdklmds'}}  onclick={this.onclickcontact}/>
-        ];
+        let contacts = [];
+
+        for(let c of this.props.contacts){
+            contacts.push((<Contact contact={c} onclick={this.onclickcontact} />))
+        }
 
         return (
             <div>
