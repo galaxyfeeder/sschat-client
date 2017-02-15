@@ -2,6 +2,24 @@ import React from 'react';
 import Conversation from '../components/Conversation';
 import Contacts from '../components/Contacts';
 import './PanelChat.css';
+import io from 'socket.io-client';
+
+/*
+http://stackoverflow.com/questions/34480703/implementing-socket-io-with-reactjs-es6
+let socket = io('http://localhost:4000');
+socket.on('keys', data => {
+    if(data.includes('PUBLIC')){
+        this.setState({
+            pub_key: data
+        });
+    }else{
+        this.setState({
+            priv_key: data
+        });
+    }
+    console.log(data);
+});
+socket.emit('create keys', '');*/
 
 class PanelChat extends React.Component {
     constructor (props){

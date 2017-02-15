@@ -1,5 +1,6 @@
 import React from 'react';
 import './PanelRegister.css';
+import rsa from 'node-rsa';
 
 class PanelRegister extends React.Component {
     constructor (props){
@@ -12,6 +13,14 @@ class PanelRegister extends React.Component {
             pub_key: undefined,
             priv_key: undefined
         };
+    }
+
+    componentDidMount (){
+        let key = new rsa({b: 2048});
+        this.setState({
+            pub_key: key.exportKey('pkcs1-public-pem'),
+            priv_key: key.exportKey('pkcs1-private-pem')
+        });
     }
 
     startchatting(){
@@ -33,11 +42,11 @@ class PanelRegister extends React.Component {
     }
 
     savepublickey (e){
-        this.savetodocument(this.props.pub_key, 'rsa-key.pub');
+        this.savetodocument(this.state.pub_key, 'rsa-key.pub');
     }
 
     saveprivatekey (e){
-        this.savetodocument(this.props.priv_key, 'rsa-key');
+        this.savetodocument(this.state.priv_key, 'rsa-key');
     }
 
     render (){
@@ -52,7 +61,7 @@ class PanelRegister extends React.Component {
                             <div className="col-md-6 panel-public">
                                 <h2>Public key</h2>
                                 <p>This is your public key. Send this key to your friends to be able to be contacted. This key is used to encryp all your messages.</p>
-                                <div className="well well-keys">{this.props.pub_key}</div>
+                                <div className="well well-keys">{this.state.pub_key}</div>
                                 <div className="text-center">
                                     <button className="btn btn-primary" onClick={this.savepublickey}>Save this key!</button>
                                 </div>
@@ -60,7 +69,7 @@ class PanelRegister extends React.Component {
                             <div className="col-md-6 panel-private">
                                 <h2>Private key</h2>
                                 <p>This is your private key. Save this key as your last thing in your life. If you share it anyone will be able to read your messages.</p>
-                                <div className="well well-keys">{this.props.priv_key}</div>
+                                <div className="well well-keys">{this.state.priv_key}</div>
                                 <div className="text-center">
                                     <button className="btn btn-primary" onClick={this.saveprivatekey}>Save this key!</button>
                                 </div>
