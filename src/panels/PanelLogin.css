@@ -6,3 +6,7 @@
 .panel-register {
     height: 100%;
 }
+
+.input-file-container {
+    padding-top: 20px;
+}

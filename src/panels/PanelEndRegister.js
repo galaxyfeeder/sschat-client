@@ -60,6 +60,9 @@ class PanelEndRegister extends React.Component {
                                     <button className="btn btn-primary" onClick={this.saveprivatekey}>Save this key!</button>
                                 </div>
                             </div>
+                            <div className="col-md-12 text-center">
+                                <button className="btn btn-success" onClick={this.startchatting}>Start chatting with these keys!</button>
+                            </div>
                         </div>
                     </div>
                 </div>
