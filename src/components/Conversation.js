@@ -31,7 +31,7 @@ class Conversation extends React.Component {
 
     sendmessage(e){
         let messages = this.state.messages;
-        messages.push({message: this.state.typed_message});
+        messages.push({message: this.state.typed_message, align: 'right'});
         this.setState({
             typed_message: '',
             messages: messages
