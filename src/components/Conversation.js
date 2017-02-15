@@ -9,6 +9,10 @@ class Conversation extends React.Component {
         return (
             <div>
                 <h2>{this.props.name}</h2>
+                <div className="conversation-container">
+                </div>
+                <input>
+                </input>
             </div>
         );
     }
