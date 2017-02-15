@@ -27,6 +27,7 @@ class Conversation extends React.Component {
 
     sendmessage(e){
         this.props.sendmessage(this.state.typed_message, this.props.pub_key);
+        this.setState({typed_message: ''})
     }
 
     render (){

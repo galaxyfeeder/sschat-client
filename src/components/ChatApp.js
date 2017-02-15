@@ -27,15 +27,15 @@ class ChatApp extends React.Component {
         this.setState({selected_contact: contact});
     }
 
-    sendmessage (message, pub_key){
-        console.log(message);
-        console.log(pub_key);
-        /*let messages = this.props.messages;
-        messages.push({message: this.state.typed_message, align: 'right'});
+    sendmessage (message, pub_key){        
+        // do it once received server callback
+        let messages = this.state.conversations[pub_key];
+        messages.push({message: message, align: 'right'});
+        let conversations = this.state.conversations;
+        conversations[pub_key] = messages;
         this.setState({
-            typed_message: '',
-            messages: messages
-        });*/
+            conversations: conversations
+        });
     }
 
     renderConversation(){
