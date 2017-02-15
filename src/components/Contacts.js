@@ -7,15 +7,17 @@ class Contacts extends React.Component {
         this.onclickcontact = this.onclickcontact.bind(this);
     }
 
-    onclickcontact (contact){
-        this.props.onclickcontact(contact);
+    onclickcontact (pub_key){
+        this.props.onclickcontact(pub_key);
     }
 
     render (){
         let contacts = [];
 
-        for(let c of this.props.contacts){
-            contacts.push((<Contact contact={c} onclick={this.onclickcontact} />))
+        for(let c in this.props.contacts){
+            if(this.props.contacts.hasOwnProperty(c)){
+                contacts.push((<Contact extras={this.props.contacts[c]} pub_key={c} onclick={this.onclickcontact} />))
+            }
         }
 
         return (

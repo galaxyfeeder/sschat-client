@@ -9,17 +9,17 @@ class Contact extends React.Component {
     }
 
     onclick (e){
-        this.props.onclick(this.props.contact);
+        this.props.onclick(this.props.pub_key);
     }
 
     showkey (e){
-        alert(this.props.contact.pub_key);
+        alert(this.props.pub_key);
     }
 
     render (){
         return (
             <div className="row contact" onClick={this.onclick}>
-                <div className="col-md-10">{this.props.contact.name}</div>
+                <div className="col-md-10">{this.props.extras.name}</div>
                 <div className="col-md-2"><span className="fa fa-info-circle" onClick={this.showkey}></span></div>
             </div>
         );

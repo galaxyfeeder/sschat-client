@@ -11,11 +11,6 @@ class Conversation extends React.Component {
         this.handlekeypress = this.handlekeypress.bind(this);
 
         this.state = {
-            contact: {
-                name: 'Mario',
-                pub_key: 'asdjasjdkksdnmdmdksdmskskcms'
-            },
-            messages: [],
             typed_message: ''
         };
     }
@@ -31,24 +26,19 @@ class Conversation extends React.Component {
     }
 
     sendmessage(e){
-        let messages = this.state.messages;
-        messages.push({message: this.state.typed_message, align: 'right'});
-        this.setState({
-            typed_message: '',
-            messages: messages
-        });
+        this.props.sendmessage(this.state.typed_message, this.props.pub_key);
     }
 
     render (){
         let messages = [];
 
-        for(let message of this.state.messages){
+        for(let message of this.props.messages){
             messages.push(<Message message={message} />);
         }
 
         return (
             <div className="full-height">
-                <h2>{this.state.contact.name}</h2>
+                <h2>{this.props.extras.name}</h2>
                 <div className="conversation-container">
                     {messages}
                 </div>

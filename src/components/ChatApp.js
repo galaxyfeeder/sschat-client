@@ -7,19 +7,51 @@ class ChatApp extends React.Component {
     constructor (props){
         super(props);
         this.changeConversation = this.changeConversation.bind(this);
+        this.sendmessage = this.sendmessage.bind(this);
+        this.state = {
+            conversations: {
+                'aslkdmsakmdmasdklmds': [{message: 'This is the first test message.', align: 'left'}, {message: 'This is a second test message of Maria.', align: 'left'}],
+                'aslkdmsakmdma535654sdf485sdklmds': [],
+                'aslkdmsak524sdmdmasdklmds': []
+            },
+            contacts: {
+                'aslkdmsakmdmasdklmds': {name: 'Maria'},
+                'aslkdmsakmdma535654sdf485sdklmds': {name: 'Miquel'},
+                'aslkdmsak524sdmdmasdklmds': {name: 'Marti'}
+            },
+            selected_contact: undefined
+        };
     }
 
     changeConversation (contact){
-        console.log(contact);
+        this.setState({selected_contact: contact});
+    }
+
+    sendmessage (message, pub_key){
+        console.log(message);
+        console.log(pub_key);
+        /*let messages = this.props.messages;
+        messages.push({message: this.state.typed_message, align: 'right'});
+        this.setState({
+            typed_message: '',
+            messages: messages
+        });*/
+    }
+
+    renderConversation(){
+        if(this.state.selected_contact !== undefined){
+            return (
+                <Conversation messages={this.state.conversations[this.state.selected_contact]}
+                              extras={this.state.contacts[this.state.selected_contact]}
+                              pub_key={this.state.selected_contact}
+                              sendmessage={this.sendmessage}/>
+            );
+        }else{
+            return (<p>Select a contact to begin </p>)
+        }
     }
 
     render(){
-        let contacts = [
-            {name: "Maria", pub_key: 'aslkdmsakmdmasdklmds'},
-            {name: "Miquel", pub_key: 'aslkdmsakmdma535654sdf485sdklmds'},
-            {name: "Marti", pub_key: 'aslkdmsak524sdmdmasdklmds'}
-        ]
-
         return (
             <div className="container">
                 <div className="panel panel-info panel-main">
@@ -29,10 +61,10 @@ class ChatApp extends React.Component {
                     <div className="panel-body">
                         <div className="row full-height">
                             <div className="col-md-4 panel-contacts">
-                                <Contacts onclickcontact={this.changeConversation} contacts={contacts}/>
+                                <Contacts onclickcontact={this.changeConversation} contacts={this.state.contacts}/>
                             </div>
                             <div className="col-md-8 panel-conversation">
-                                <Conversation />
+                                {this.renderConversation()}
                             </div>
                         </div>
                     </div>
