@@ -17,11 +17,20 @@
     height: 100%;
 }
 
+.panel-body {
+    height: 100%;
+    padding-bottom: 55px;
+}
+
 .panel-contacts {
     border-right: 2px solid #efefef;
     height: 100%;
 }
 
 .panel-conversation {
+    height: 100%;
+}
 
+.full-height {
+    height: 100%;
 }

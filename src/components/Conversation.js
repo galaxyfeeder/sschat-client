@@ -1,5 +1,6 @@
 import React from 'react';
 import Message from './Message';
+import './Conversation.css';
 
 class Conversation extends React.Component {
     constructor (props){
@@ -46,12 +47,12 @@ class Conversation extends React.Component {
         }
 
         return (
-            <div>
+            <div className="full-height">
                 <h2>{this.state.contact.name}</h2>
                 <div className="conversation-container">
                     {messages}
                 </div>
-                <div className="input-group">
+                <div className="input-group send-group">
                     <input type="text" className="form-control" placeholder="Type a message..." onChange={this.updatetypedmessage}  onKeyPress={this.handlekeypress} value={this.state.typed_message} />
                     <span className="input-group-btn">
                         <button className="btn btn-default" type="button" onClick={this.sendmessage}>Send!</button>

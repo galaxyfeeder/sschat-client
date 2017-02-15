@@ -1,0 +1,17 @@
+.conversation-container {
+    top: 55px;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    margin-right: 15px;
+    margin-left: 15px;
+    position: absolute;
+    overflow-y: scroll;
+}
+
+.send-group {
+    position: absolute;
+    bottom: 0;
+    margin-right: 30px;
+    left: 15px;
+}

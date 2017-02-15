@@ -27,7 +27,7 @@ class ChatApp extends React.Component {
                         <div className="panel-title">Simple Secure Chat</div>
                     </div>
                     <div className="panel-body">
-                        <div className="row">
+                        <div className="row full-height">
                             <div className="col-md-4 panel-contacts">
                                 <Contacts onclickcontact={this.changeConversation} contacts={contacts}/>
                             </div>
