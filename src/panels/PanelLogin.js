@@ -14,9 +14,8 @@ class PanelLogin extends React.Component {
     }
 
     startchatting(e){
-        let pub_key = '', priv_key = '';
         if(this.state.pub_key !== undefined && this.state.priv_key !== undefined){
-            this.props.startchatting(pub_key, priv_key);
+            this.props.startchatting(this.state.pub_key, this.state.priv_key);
         }
     }
 

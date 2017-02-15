@@ -1,18 +1,23 @@
 import React from 'react';
-import './PanelEndRegister.css';
+import './PanelRegister.css';
 
-class PanelEndRegister extends React.Component {
+class PanelRegister extends React.Component {
     constructor (props){
         super(props);
         this.startchatting = this.startchatting.bind(this);
         this.savetodocument = this.savetodocument.bind(this);
         this.saveprivatekey = this.saveprivatekey.bind(this);
         this.savepublickey = this.savepublickey.bind(this);
+        this.state = {
+            pub_key: undefined,
+            priv_key: undefined
+        };
     }
 
     startchatting(){
-        let pub_key, priv_key;
-        this.props.startchatting(pub_key, priv_key);
+        if(this.state.pub_key !== undefined && this.state.priv_key !== undefined){
+            this.props.startchatting(this.state.pub_key, this.state.priv_key);
+        }
     }
 
     savetodocument (data, name){
@@ -71,4 +76,4 @@ class PanelEndRegister extends React.Component {
     }
 }
 
-export default PanelEndRegister;
+export default PanelRegister;

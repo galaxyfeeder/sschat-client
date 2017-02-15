@@ -1,7 +1,7 @@
 import React from 'react';
 import './ChatApp.css';
 import PanelChat from './panels/PanelChat';
-import PanelEndRegister from './panels/PanelEndRegister';
+import PanelRegister from './panels/PanelRegister';
 import PanelLogin from './panels/PanelLogin';
 
 class ChatApp extends React.Component {
@@ -37,7 +37,7 @@ class ChatApp extends React.Component {
                 return (<PanelLogin startchatting={this.startchatting} createnewkeys={this.createnewkeys} />);
             case 1:
                 // registering user
-                return (<PanelEndRegister pub_key={this.state.user_pub_key} priv_key={this.state.user_priv_key} startchatting={this.startchatting} />);
+                return (<PanelRegister startchatting={this.startchatting} />);
             case 2:
                 // chatting time
                 return (<PanelChat pub_key={this.state.user_pub_key} priv_key={this.state.user_priv_key} />);
