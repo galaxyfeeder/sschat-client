@@ -14,11 +14,7 @@ class PanelChat extends React.Component {
         this.openModal = this.openModal.bind(this);
         this.state = {
             conversations: {},
-            contacts: {
-                'aslkdmsakmdmasdklmds': {name: 'Maria'},
-                'aslkdmsakmdma535654sdf485sdklmds': {name: 'Miquel'},
-                'aslkdmsak524sdmdmasdklmds': {name: 'Marti'}
-            },
+            contacts: {},
             selected_contact: undefined,
             add_contact: false
         };
@@ -32,6 +28,9 @@ class PanelChat extends React.Component {
         });
         this.socket.on('info', data => {
             console.log(data);
+            if(data === 'Correctly registered.'){
+                this.socket.emit('get contacts', '');
+            }
         });
     }
 
@@ -54,6 +53,17 @@ class PanelChat extends React.Component {
         });
     }
 
+    addnewcontact (pub_key, name){
+        this.setState({add_contact: false});
+        if(pub_key !== undefined && name !== undefined){
+            this.socket.emit('add contact', JSON.stringify({pub_key: pub_key, name: name}));
+        }
+    }
+
+    openModal(e){
+        this.setState({add_contact: true});
+    }
+
     renderConversation(){
         if(this.state.selected_contact !== undefined){
             return (
@@ -65,18 +75,6 @@ class PanelChat extends React.Component {
         }else{
             return (<p>Select a contact to begin </p>)
         }
-    }
-
-    addnewcontact (pub_key, name){
-        this.setState({add_contact: false});
-        if(pub_key !== undefined && name !== undefined){
-            console.log(pub_key);
-            console.log(name);
-        }
-    }
-
-    openModal(e){
-        this.setState({add_contact: true});
     }
 
     render (){
