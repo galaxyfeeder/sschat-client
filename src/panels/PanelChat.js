@@ -34,10 +34,40 @@ class PanelChat extends React.Component {
             }
         });
         this.socket.on('conversations', data => {
-            this.setState({conversations: data});
+            let conversations = {};
+            for(let conversation in data){
+                if(data.hasOwnProperty(conversation)){
+                    let messages = [];
+                    for(let message of data[conversation]){
+                        if(message.to === this.props.pub_key){
+                            messages.push({message: message.message, align: 'left'});
+                        }else{
+                            messages.push({message: message.message, align: 'right'});
+                        }
+                    }
+                    conversations[conversation] = messages;
+                }
+            }
+            this.setState({conversations: conversations});
         });
         this.socket.on('message', data => {
-            console.log(data);
+            if(data.to === this.props.pub_key){
+                let messages = this.state.conversations[data.sender];
+                messages.push({message: data.message, align: 'left'});
+                let conversations = this.state.conversations;
+                conversations[data.sender] = messages;
+                this.setState({
+                    conversations: conversations
+                });
+            }else{
+                let messages = this.state.conversations[data.to];
+                messages.push({message: data.message, align: 'right'});
+                let conversations = this.state.conversations;
+                conversations[data.to] = messages;
+                this.setState({
+                    conversations: conversations
+                });
+            }
         });
     }
 
@@ -50,14 +80,7 @@ class PanelChat extends React.Component {
     }
 
     sendmessage (message, pub_key){
-        // do it once received server callback
-        let messages = this.state.conversations[pub_key];
-        messages.push({message: message, align: 'right'});
-        let conversations = this.state.conversations;
-        conversations[pub_key] = messages;
-        this.setState({
-            conversations: conversations
-        });
+        this.socket.emit('message', JSON.stringify({message: message, to: pub_key}));
     }
 
     addnewcontact (pub_key, name){
