@@ -4,6 +4,7 @@ import Contacts from '../components/Contacts';
 import './PanelChat.css';
 import io from 'socket.io-client';
 import AddContact from '../modals/AddContact';
+import rsa from 'node-rsa';
 
 class PanelChat extends React.Component {
     constructor (props){
@@ -18,6 +19,7 @@ class PanelChat extends React.Component {
             selected_contact: undefined,
             add_contact: false
         };
+        this.key = new rsa(this.props.priv_key);
         this.socket = io('http://localhost:4000');
         this.socket.on('contacts', data => {
             let contacts = {};
@@ -39,10 +41,11 @@ class PanelChat extends React.Component {
                 if(data.hasOwnProperty(conversation)){
                     let messages = [];
                     for(let message of data[conversation]){
+                        let decrypted = this.key.decrypt(message.message, 'utf8');
                         if(message.to === this.props.pub_key){
-                            messages.push({message: message.message, align: 'left'});
+                            messages.push({message: decrypted, align: 'left'});
                         }else{
-                            messages.push({message: message.message, align: 'right'});
+                            messages.push({message: decrypted, align: 'right'});
                         }
                     }
                     conversations[conversation] = messages;
@@ -51,9 +54,10 @@ class PanelChat extends React.Component {
             this.setState({conversations: conversations});
         });
         this.socket.on('message', data => {
+            let decrypted = this.key.decrypt(data.message, 'utf8');
             if(data.to === this.props.pub_key){
                 let messages = this.state.conversations[data.sender];
-                messages.push({message: data.message, align: 'left'});
+                messages.push({message: decrypted, align: 'left'});
                 let conversations = this.state.conversations;
                 conversations[data.sender] = messages;
                 this.setState({
@@ -61,7 +65,7 @@ class PanelChat extends React.Component {
                 });
             }else{
                 let messages = this.state.conversations[data.to];
-                messages.push({message: data.message, align: 'right'});
+                messages.push({message: decrypted, align: 'right'});
                 let conversations = this.state.conversations;
                 conversations[data.to] = messages;
                 this.setState({
@@ -80,7 +84,9 @@ class PanelChat extends React.Component {
     }
 
     sendmessage (message, pub_key){
-        this.socket.emit('message', JSON.stringify({message: message, to: pub_key}));
+        let key = new rsa(pub_key);
+        this.socket.emit('message', JSON.stringify({message: key.encrypt(message, 'base64'), to: pub_key, encrypt: pub_key}));
+        this.socket.emit('message', JSON.stringify({message: this.key.encrypt(message, 'base64'), to: pub_key, encrypt: this.props.pub_key}));
     }
 
     addnewcontact (pub_key, name){
