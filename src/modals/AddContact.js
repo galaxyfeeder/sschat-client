@@ -5,6 +5,7 @@ class AddContact extends React.Component {
     constructor (props){
         super(props);
         this.handleClose = this.handleClose.bind(this);
+        this.handleCancel = this.handleCancel.bind(this);
         this.handleFileChange = this.handleFileChange.bind(this);
         this.handleTextChange = this.handleTextChange.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
@@ -15,7 +16,13 @@ class AddContact extends React.Component {
     }
 
     handleClose (e){
+        this.setState({pub_key: '', name: ''});
         this.props.handleAddContact(this.state.pub_key, this.state.name);
+    }
+
+    handleCancel (e){
+        this.setState({pub_key: '', name: ''});
+        this.props.handleAddContact(undefined, undefined);
     }
 
     handleFileChange (e){

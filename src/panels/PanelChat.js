@@ -30,7 +30,14 @@ class PanelChat extends React.Component {
             console.log(data);
             if(data === 'Correctly registered.'){
                 this.socket.emit('get contacts', '');
+                this.socket.emit('get conversations', '');
             }
+        });
+        this.socket.on('conversations', data => {
+            this.setState({conversations: data});
+        });
+        this.socket.on('message', data => {
+            console.log(data);
         });
     }
 
