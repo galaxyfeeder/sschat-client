@@ -35,5 +35,9 @@ use the public key also for identification and not only for encrypting the messa
 ### Logging in
 ![alt text](http://i66.tinypic.com/34qww3k.png "Login screen")
 
+Just opening the app we arrive to the login screen where we are able to start with our own keys or create a new pair of keys.
+
 ### Creating new account
 ![alt text](http://i64.tinypic.com/wb2ft4.png "Register screen")
+
+After selecting that we would like to register, we create our new keys. **You should now save these keys**, otherwise you would not be able to identify you again.
