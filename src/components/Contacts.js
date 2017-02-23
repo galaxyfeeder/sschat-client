@@ -17,7 +17,6 @@ class Contacts extends React.Component {
 
         return (
             <div>
-                <h2>Contacts</h2>
                 {contacts}
             </div>
         );
