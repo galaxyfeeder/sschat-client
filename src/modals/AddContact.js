@@ -69,7 +69,7 @@ class AddContact extends React.Component {
                     <input type="file" onChange={this.handleFileChange} />
                 </div>
                 <button className="btn btn-success" onClick={this.handleClose}>Add this contact</button>
-                <button className="btn btn-primary" onClick={this.handleClose}>Cancel</button>
+                <button className="btn btn-primary" onClick={this.handleCancel}>Cancel</button>
             </ReactModal>
         );
     }

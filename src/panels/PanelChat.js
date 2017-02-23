@@ -13,6 +13,7 @@ class PanelChat extends React.Component {
         this.sendmessage = this.sendmessage.bind(this);
         this.addnewcontact = this.addnewcontact.bind(this);
         this.openModal = this.openModal.bind(this);
+        this.onEditContact = this.onEditContact.bind(this);
         this.state = {
             conversations: {},
             contacts: {},
@@ -100,6 +101,12 @@ class PanelChat extends React.Component {
         this.setState({add_contact: true});
     }
 
+    onEditContact(pub_key, extras){
+        if(pub_key !== undefined && extras !== undefined){
+            this.socket.emit('edit contact', JSON.stringify({pub_key: pub_key, name: extras.name}));
+        }
+    }
+
     renderConversation(){
         if(this.state.selected_contact !== undefined){
             return (
@@ -123,7 +130,9 @@ class PanelChat extends React.Component {
                     <div className="panel-body">
                         <div className="row full-height">
                             <div className="col-md-4 panel-contacts">
-                                <Contacts onclickcontact={this.changeConversation} contacts={this.state.contacts}/>
+                                <Contacts onclickcontact={this.changeConversation}
+                                          contacts={this.state.contacts}
+                                          onEditContact={this.onEditContact}/>
                                 <AddContact showModal={this.state.add_contact}
                                             handleAddContact={this.addnewcontact}/>
                                 <button className="btn btn-primary" onClick={this.openModal}>Add new contact</button>
